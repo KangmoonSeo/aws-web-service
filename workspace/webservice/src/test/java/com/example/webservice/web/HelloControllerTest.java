@@ -1,48 +1,66 @@
 package com.example.webservice.web;
 
+import com.example.webservice.web.dto.HelloRequestDto;
+import com.example.webservice.web.dto.HelloResponseDto;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
 import org.springframework.test.web.servlet.MockMvc;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
-@WebMvcTest
+// @WebMvcTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class HelloControllerTest {
+    @LocalServerPort
+    private int port;
     @Autowired
-    private MockMvc mvc;
+    private TestRestTemplate restTemplate;
 
 
     @Test
-    public void hello가_리턴된다() throws Exception {
+    public void hello가_리턴된다() {
         // given
         String hello = "hello";
 
         // when
-
+        String url = "http://localhost:" + port + "/hello";
+        ResponseEntity<String> responseEntity = restTemplate.getForEntity(url, String.class);
 
         // then
-        mvc.perform(get("/hello"))
-                .andExpect(status().isOk())
-                .andExpect(content().string(hello));
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody()).isEqualTo(hello);
 
     }
 
     @Test
-    public void helloDto가_리턴된다() throws Exception {
+    public void helloDto가_리턴된다() {
         // given
         String name = "hello";
         Integer amount = 1000;
 
+        String url = "http://localhost:" + port + "/hello/dto";
+
+
+        // when
+        ResponseEntity<HelloResponseDto> responseEntity = restTemplate.postForEntity(
+                url,
+                HelloRequestDto.builder()
+                        .name(name)
+                        .amount(amount)
+                        .build(),
+                HelloResponseDto.class);
 
         // then
-        mvc.perform(get("/hello/dto")
-                        .param("name", name)
-                        .param("amount", String.valueOf(amount))
-                ).andExpect(status().isOk())
-                .andExpect(jsonPath("$.name").value(name))
-                .andExpect(jsonPath("$.amount").value(amount * 2));
+        assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(responseEntity.getBody().getName()).isEqualTo(name);
+        assertThat(responseEntity.getBody().getAmount()).isEqualTo(amount * 2);
     }
 }

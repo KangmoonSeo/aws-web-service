@@ -1,5 +1,6 @@
 package com.example.webservice.web;
 
+import com.example.webservice.web.dto.HelloRequestDto;
 import com.example.webservice.web.dto.HelloResponseDto;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +17,8 @@ public class HelloController {
     }
 
     @RequestMapping("/dto")
-    public HelloResponseDto helloDto(@RequestParam String name, @RequestParam Integer amount) {
-        amount *= 2;
-        return new HelloResponseDto(name, amount);
+    public HelloResponseDto helloDto(@RequestBody HelloRequestDto requestDto) {
+
+        return new HelloResponseDto(requestDto.getName(), requestDto.getAmount() * 2);
     }
 }
