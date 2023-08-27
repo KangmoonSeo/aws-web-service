@@ -4,6 +4,8 @@ import com.example.webservice.domain.posts.Posts;
 import com.example.webservice.domain.posts.PostsRepository;
 import com.example.webservice.web.dto.PostsRequestDto;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,13 +20,14 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) // ?
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class PostsApiControllerTest {
 
     @LocalServerPort
     private int port;
     @Autowired
-    private TestRestTemplate restTemplate; // ?
+    private TestRestTemplate restTemplate;
+
     @Autowired
     private PostsRepository postsRepository;
 
@@ -53,8 +56,8 @@ class PostsApiControllerTest {
 
         List<Posts> all = postsRepository.findAll();
 
-        assertThat(all.get(0).getTitle()).isEqualTo(title);
-        assertThat(all.get(0).getContent()).isEqualTo(content);
+        assertThat(all.get(all.size() - 1).getTitle()).isEqualTo(title);
+        assertThat(all.get(all.size() - 1).getContent()).isEqualTo(content);
     }
 
     @Test
@@ -69,7 +72,6 @@ class PostsApiControllerTest {
         Long updateId = savedPosts.getId();
         String expectedTitle = "title 2";
         String expectedContent = "content 2";
-
 
         PostsRequestDto requestDto = PostsRequestDto.builder()
                 .title(expectedTitle)
@@ -88,7 +90,7 @@ class PostsApiControllerTest {
 
         List<Posts> all = postsRepository.findAll();
 
-        assertThat(all.get(0).getTitle()).isEqualTo(expectedTitle);
-        assertThat(all.get(0).getContent()).isEqualTo(expectedContent);
+        assertThat(all.get(all.size() - 1).getTitle()).isEqualTo(expectedTitle);
+        assertThat(all.get(all.size() - 1).getContent()).isEqualTo(expectedContent);
     }
 }

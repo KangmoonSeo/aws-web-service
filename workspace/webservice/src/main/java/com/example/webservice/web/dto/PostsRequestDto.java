@@ -4,8 +4,10 @@ import com.example.webservice.domain.posts.Posts;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor // constructor DI
 public class PostsRequestDto {
 

@@ -1,13 +1,17 @@
 package com.example.webservice.service;
 
+import com.example.webservice.domain.BaseTimeEntity;
 import com.example.webservice.domain.posts.Posts;
 import com.example.webservice.domain.posts.PostsRepository;
 import com.example.webservice.web.dto.PostsResponseDto;
 import com.example.webservice.web.dto.PostsRequestDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Supplier;
 
 @RequiredArgsConstructor
@@ -33,6 +37,16 @@ public class PostsService {
         Posts entity = postsRepository.findById(id).orElseThrow(noMatchedException(id));
         return new PostsResponseDto(entity);
     }
+    @Transactional(readOnly = true)
+    public List<PostsResponseDto> findAll() {
+
+        List<Posts> posts = postsRepository.findAll();
+        List<PostsResponseDto> ret = new ArrayList<>();
+
+        posts.forEach(p -> ret.add(new PostsResponseDto(p)));
+        return ret;
+    }
+
 
     // == exception == //
     private static Supplier<IllegalArgumentException> noMatchedException(Long id) {
