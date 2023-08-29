@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div class="container mt-5">
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <h2 class="text-center">게시글 등록</h2>
+            <form>
+                <!-- 제목 입력란 -->
+                <div class="form-group">
+                    <label for="title">제목</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="제목을 입력하세요" required>
+                </div>
+                <!-- 작성자 입력란 -->
+                <div class="form-group">
+                    <label for="author">작성자</label>
+                    <input type="text" class="form-control" id="author" name="author" placeholder="작성자를 입력하세요" required>
+                </div>
+                <!-- 내용 입력란 -->
+                <div class="form-group">
+                    <label for="content">내용</label>
+                    <textarea class="form-control" id="content" name="content" rows="4" placeholder="내용을 입력하세요" required></textarea>
+                </div>
+                <!-- 버튼 그룹 -->
+                <div class="form-group text-left">
+                    <!-- 취소 버튼 -->
+                    <a href="/static" class="btn btn-secondary">취소</a>
+                    <!-- 등록 버튼 -->
+                    <button type="submit" class="btn btn-primary" id="btn-save">등록</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div th:replace="fragments/footer :: footer"/>
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -1,26 +1,24 @@
 package com.example.webservice.web.dto;
 
 import com.example.webservice.domain.posts.Posts;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 @Getter
 
-public class PostsResponseDto {
+public class PostsListResponseDto {
 
     private Long id;
     private String title;
-    private String content;
     private String author;
+    private LocalDateTime lastModifiedDate;
 
 
-    public PostsResponseDto(Posts entity) {
+    public PostsListResponseDto(Posts entity) {
         this.id = entity.getId();
         this.title = entity.getTitle();
-        this.content = entity.getContent();
         this.author = entity.getAuthor();
+        this.lastModifiedDate = entity.getLastModifiedDate();
     }
 }

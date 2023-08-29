@@ -1,4 +1,4 @@
-package com.example.webservice.web;
+package com.example.webservice.web.controller;
 
 import com.example.webservice.web.dto.HelloRequestDto;
 import com.example.webservice.web.dto.HelloResponseDto;

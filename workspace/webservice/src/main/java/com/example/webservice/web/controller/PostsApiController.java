@@ -1,4 +1,4 @@
-package com.example.webservice.web;
+package com.example.webservice.web.controller;
 
 import com.example.webservice.service.PostsService;
 import com.example.webservice.web.dto.PostsResponseDto;
@@ -31,6 +31,12 @@ public class PostsApiController {
         return postsService.update(id, requestDto);
     }
 
+    @DeleteMapping("/{id}")
+    public Long delete(@PathVariable Long id) {
+        postsService.delete(id);
+        return id;
+    }
+
     @GetMapping("/{id}")
     public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
@@ -43,15 +49,15 @@ public class PostsApiController {
 
         postsService.save(
                 PostsRequestDto.builder()
-                        .title("Lorem")
-                        .content("text 01")
-                        .author("John Doe")
+                        .title("테스트 게시글입니다. ")
+                        .content("lorem ipsum")
+                        .author("관리자")
                         .build());
         postsService.save(
                 PostsRequestDto.builder()
-                        .title("Ipsum")
-                        .content("text 02")
-                        .author("Jane Doe")
+                        .title("테스트 게시글입니다. (2)")
+                        .content("text message for test")
+                        .author("관리자")
                         .build());
     }
 }

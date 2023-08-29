@@ -1,0 +1,52 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <div th:replace="fragments/bodyHeader :: bodyHeader"/>
+
+    <div class="jumbotron">
+        <p class="lead">상호작용</p>
+        <p>
+            <a class="btn btn-lg btn-secondary" href="/posts/new">글 등록</a>
+        </p>
+    </div>
+
+    <!-- 부트스트랩 테이블 스타일 적용 -->
+    <table class="table table-striped table-bordered">
+        <thead class="thead-light"> <!-- 배경 색 연하게 변경 -->
+        <tr>
+            <th>게시글번호</th>
+            <th>제목</th>
+            <th>작성자</th>
+            <th>최종수정일</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        <tr th:if="|${lists.isEmpty()}|">
+            <td colspan="4" class="text-center">작성글이 없습니다.</td>
+        </tr>
+        <tr th:each="posts : ${lists}">
+            <td th:text="${posts.id}"></td>
+            <td>
+                <!-- 제목을 클릭하면 수정 페이지로 이동 -->
+                <a th:href="@{/posts/{id}/edit(id=${posts.id})}" th:text="${posts.title}"></a>
+            </td>
+            <td th:text="${posts.author}"></td>
+            <td th:text="${posts.lastModifiedDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+    <div th:replace="fragments/footer :: footer"/>
+
+</div> <!-- /container -->
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package com.example.webservice.service;
 import com.example.webservice.domain.BaseTimeEntity;
 import com.example.webservice.domain.posts.Posts;
 import com.example.webservice.domain.posts.PostsRepository;
+import com.example.webservice.web.dto.PostsListResponseDto;
 import com.example.webservice.web.dto.PostsResponseDto;
 import com.example.webservice.web.dto.PostsRequestDto;
 import lombok.RequiredArgsConstructor;
@@ -13,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -32,11 +34,20 @@ public class PostsService {
         return posts.getId();
     }
 
+    public void delete(Long id) {
+        Posts posts = postsRepository.findById(id)
+                .orElseThrow(noMatchedException(id));
+
+        postsRepository.delete(posts);
+    }
+
+
     @Transactional(readOnly = true)
     public PostsResponseDto findById(Long id) {
         Posts entity = postsRepository.findById(id).orElseThrow(noMatchedException(id));
         return new PostsResponseDto(entity);
     }
+
     @Transactional(readOnly = true)
     public List<PostsResponseDto> findAll() {
 
@@ -45,6 +56,14 @@ public class PostsService {
 
         posts.forEach(p -> ret.add(new PostsResponseDto(p)));
         return ret;
+    }
+
+    @Transactional(readOnly = true)
+    public List<PostsListResponseDto> findAllDesc() {
+        return postsRepository.findAllDesc()
+                .stream()
+                .map(PostsListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 
