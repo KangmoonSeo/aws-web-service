@@ -1,9 +1,9 @@
-package com.example.webservice.web.controller;
+package com.example.webservice.controller;
 
+import com.example.webservice.dto.PostsRequestDto;
+import com.example.webservice.dto.PostsResponseDto;
 import com.example.webservice.service.PostsService;
-import com.example.webservice.web.dto.PostsResponseDto;
-import com.example.webservice.web.dto.PostsRequestDto;
-import jakarta.annotation.PostConstruct;
+import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

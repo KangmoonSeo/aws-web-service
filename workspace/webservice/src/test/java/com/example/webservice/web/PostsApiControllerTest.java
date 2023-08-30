@@ -2,10 +2,8 @@ package com.example.webservice.web;
 
 import com.example.webservice.domain.posts.Posts;
 import com.example.webservice.domain.posts.PostsRepository;
-import com.example.webservice.web.dto.PostsRequestDto;
+import com.example.webservice.dto.PostsRequestDto;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

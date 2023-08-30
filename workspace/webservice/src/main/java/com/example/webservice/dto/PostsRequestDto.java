@@ -1,4 +1,4 @@
-package com.example.webservice.web.dto;
+package com.example.webservice.dto;
 
 import com.example.webservice.domain.posts.Posts;
 import lombok.Builder;

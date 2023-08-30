@@ -1,17 +1,20 @@
 package com.example.webservice.domain.posts;
 
 import com.example.webservice.domain.BaseTimeEntity;
-import jakarta.persistence.*;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Entity
 @Getter
 public class Posts extends BaseTimeEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "posts_id")
     private Long id;
 
     @Column(length = 500, nullable = false)

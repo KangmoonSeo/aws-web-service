@@ -1,13 +1,11 @@
 package com.example.webservice.service;
 
-import com.example.webservice.domain.BaseTimeEntity;
 import com.example.webservice.domain.posts.Posts;
 import com.example.webservice.domain.posts.PostsRepository;
-import com.example.webservice.web.dto.PostsListResponseDto;
-import com.example.webservice.web.dto.PostsResponseDto;
-import com.example.webservice.web.dto.PostsRequestDto;
+import com.example.webservice.dto.PostsListResponseDto;
+import com.example.webservice.dto.PostsRequestDto;
+import com.example.webservice.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

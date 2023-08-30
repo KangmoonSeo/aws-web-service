@@ -1,8 +1,8 @@
-package com.example.webservice.web.controller;
+package com.example.webservice.controller;
 
+import com.example.webservice.dto.PostsListResponseDto;
+import com.example.webservice.dto.PostsResponseDto;
 import com.example.webservice.service.PostsService;
-import com.example.webservice.web.dto.PostsListResponseDto;
-import com.example.webservice.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

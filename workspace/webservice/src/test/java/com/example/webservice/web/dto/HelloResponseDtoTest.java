@@ -1,10 +1,9 @@
 package com.example.webservice.web.dto;
 
-import org.assertj.core.api.Assertions;
+import com.example.webservice.dto.HelloResponseDto;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class HelloResponseDtoTest {

@@ -1,11 +1,9 @@
 package com.example.webservice.web;
 
-import com.example.webservice.web.dto.HelloRequestDto;
-import com.example.webservice.web.dto.HelloResponseDto;
-import org.assertj.core.api.Assertions;
+import com.example.webservice.dto.HelloRequestDto;
+import com.example.webservice.dto.HelloResponseDto;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;

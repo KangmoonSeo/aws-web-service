@@ -1,11 +1,7 @@
-package com.example.webservice.web.dto;
+package com.example.webservice.dto;
 
 import com.example.webservice.domain.posts.Posts;
-import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
 
 @Getter
 
