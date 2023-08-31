@@ -3,10 +3,13 @@ package com.example.webservice.controller;
 import com.example.webservice.dto.PostsRequestDto;
 import com.example.webservice.dto.PostsResponseDto;
 import com.example.webservice.service.PostsService;
+
 import javax.annotation.PostConstruct;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,7 +30,9 @@ public class PostsApiController {
     }
 
     @PutMapping("/{id}")
-    public Long update(@PathVariable Long id, @RequestBody PostsRequestDto requestDto) {
+    public Long update(@PathVariable Long id, HttpRequest httpRequest, @RequestBody PostsRequestDto requestDto) {
+        System.out.println("httpRequest = " + httpRequest.uri());
+
         return postsService.update(id, requestDto);
     }
 
@@ -38,7 +43,10 @@ public class PostsApiController {
     }
 
     @GetMapping("/{id}")
-    public PostsResponseDto findById(@PathVariable Long id) {
+    public PostsResponseDto findById(@PathVariable Long id, HttpRequest httpRequest) {
+;
+        System.out.println("httpRequest = " + httpRequest.uri());
+        System.out.println("id = " + id);
         return postsService.findById(id);
     }
 

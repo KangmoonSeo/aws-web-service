@@ -14,8 +14,13 @@
 
     <div class="jumbotron">
         <p class="lead">상호작용</p>
-        <p>
-            <a class="btn btn-lg btn-secondary" href="/posts/new">글 등록</a>
+        <div th:if="${user != null}">
+            <p><span th:text="${user.name}">사용자</span>님, 안녕하세요.</p>
+            <a class="btn btn-lg btn-primary" href="/posts/new">글 등록</a>
+            <a class="btn btn-lg btn-secondary" href="/logout">Logout</a>
+        </div>
+        <p th:if="${user == null}">
+            <a class="btn btn-lg btn-secondary" href="/oauth2/authorization/google">Google Login</a>
         </p>
     </div>
 

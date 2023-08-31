@@ -1,0 +1,13 @@
+
+# Spring Security and OAuth 2.0
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 815675661448-2qg8ndd1a34bbbqu5smcmqgn4mtl1bo5.apps.googleusercontent.com
+            client-secret: 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
+            # redirect-uri: https://localhost:8080/oauth2/code/google
+            scope: profile,email
+

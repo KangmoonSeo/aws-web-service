@@ -26,6 +26,7 @@ let index = {
             content: $('#content').val()
         };
 
+        if (!confirm("등록하시겠습니까?")) return;
         $.ajax({
             type: 'POST',
             url: '/api/v1/posts',

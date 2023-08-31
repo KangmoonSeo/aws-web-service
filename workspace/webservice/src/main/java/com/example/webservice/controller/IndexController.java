@@ -1,5 +1,6 @@
 package com.example.webservice.controller;
 
+import com.example.webservice.config.oauth.dto.SessionUser;
 import com.example.webservice.dto.PostsListResponseDto;
 import com.example.webservice.dto.PostsResponseDto;
 import com.example.webservice.service.PostsService;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -16,11 +18,16 @@ import java.util.List;
 public class IndexController {
 
     private final PostsService postsService;
+    private final HttpSession httpSession;
 
     @GetMapping("/")
     public String index(Model model) {
         List<PostsListResponseDto> lists = postsService.findAllDesc();
         model.addAttribute("lists", lists);
+        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
         return "index";
     }
 
