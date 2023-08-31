@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpRequest;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -30,9 +29,7 @@ public class PostsApiController {
     }
 
     @PutMapping("/{id}")
-    public Long update(@PathVariable Long id, HttpRequest httpRequest, @RequestBody PostsRequestDto requestDto) {
-        System.out.println("httpRequest = " + httpRequest.uri());
-
+    public Long update(@PathVariable Long id, @RequestBody PostsRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
@@ -43,14 +40,12 @@ public class PostsApiController {
     }
 
     @GetMapping("/{id}")
-    public PostsResponseDto findById(@PathVariable Long id, HttpRequest httpRequest) {
-;
-        System.out.println("httpRequest = " + httpRequest.uri());
-        System.out.println("id = " + id);
+    public PostsResponseDto findById(@PathVariable Long id) {
         return postsService.findById(id);
     }
 
     // == mock data for dev environment == //
+
     @PostConstruct
     public void init() {
         if (!postsService.findAll().isEmpty()) return;
