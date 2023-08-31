@@ -1,5 +1,6 @@
 package com.example.webservice.controller;
 
+import com.example.webservice.config.oauth.LoginUser;
 import com.example.webservice.config.oauth.dto.SessionUser;
 import com.example.webservice.dto.PostsListResponseDto;
 import com.example.webservice.dto.PostsResponseDto;
@@ -21,10 +22,9 @@ public class IndexController {
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model) {
+    public String index(Model model, @LoginUser SessionUser user) {
         List<PostsListResponseDto> lists = postsService.findAllDesc();
         model.addAttribute("lists", lists);
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
         if (user != null) {
             model.addAttribute("user", user);
         }
