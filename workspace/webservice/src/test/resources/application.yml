@@ -1,0 +1,29 @@
+spring:
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  datasource:
+    driverClassName: org.h2.Driver
+    # Server Mode
+    # url: jdbc:h2:tcp://localhost/~/GIT-REPO/aws-web-service/databases/webservice
+    # Embedded Mode
+    url: jdbc:h2:file:~/GIT-REPO/aws-web-service/databases/webservice
+    # In-Memory Mode
+    # url: jdbc:h2:mem:test
+    username: sa
+    password:
+  session:
+    store-type: jdbc
+    jdbc:
+      initialize-schema: always
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: test
+            client-secret: test
+            scope: profile,email
